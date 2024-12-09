@@ -1,0 +1,49 @@
+[2024-12-09 16:19:41,594] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:41,594] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,594] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,595] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:41,595] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:41,595] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:41,595] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:41,729] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:41,729] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,729] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,730] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:41,730] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:41,730] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:41,730] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:41,831] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:41,831] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,831] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,831] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:41,832] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:41,832] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:41,832] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:41,958] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:41,959] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:42,065] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:42,065] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:42,208] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:42,209] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
+[2024-12-09 16:19:42,329] INFO [logger.logger.publish:26] Sent message to queue order_queue: {'order_id': 12345, 'customer_name': 'John Doe', 'items': [{'item': 'Burger', 'quantity': 2}, {'item': 'Fries', 'quantity': 1}], 'total': 15.5}
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:21] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:22] Processing order 12345 for John Doe
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:23] Items to prepare:
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:25] - 2 x Burger
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:25] - 1 x Fries
+[2024-12-09 16:19:42,329] INFO [logger.logger.process_order_callback:28] Order 12345 completed! Total: $15.5
