@@ -1,5 +1,4 @@
 import json
-import time
 
 from logger.logger import logger
 from src.api.v1.services.rabbit_mq.base import BaseRabbitMQ
@@ -11,7 +10,6 @@ class RabbitMQConsumer(BaseRabbitMQ):
     def common_callback(ch, method, properties, body):
         decoded_data = json.loads(body)
         logger.info(f"decoded_data: {decoded_data}")
-
 
     @staticmethod
     def process_order_callback(ch, method, properties, body):
@@ -39,4 +37,3 @@ class RabbitMQConsumer(BaseRabbitMQ):
         self.channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
         self.channel.basic_qos(prefetch_count=1)
         self.channel.start_consuming()
-

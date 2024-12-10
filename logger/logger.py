@@ -32,5 +32,6 @@ LOGGING = {
 logging.config.dictConfig(LOGGING)
 logger = logging.getLogger(__name__)
 logging.getLogger("pika").setLevel(logging.WARNING)
+logging.getLogger("aiokafka").setLevel(logging.WARNING)
 
 
