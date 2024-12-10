@@ -11,6 +11,9 @@ class ConfigSetting(BaseSettings):
     RABBITMQ_HOST: str
     RABBITMQ_PORT: int
 
+    CELERY_BROKER_URL: str
+    CELERY_RESULT_BACKEND: str
+
 
 @lru_cache
 def get_settings():
