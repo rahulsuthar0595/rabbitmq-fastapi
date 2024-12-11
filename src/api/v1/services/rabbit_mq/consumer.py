@@ -33,7 +33,7 @@ class RabbitMQConsumer(BaseRabbitMQ):
             callback = self.process_order_callback
         else:
             callback = self.common_callback
-        self.channel.queue_declare(queue=queue_name)
+        self.channel.queue_declare(queue_name, durable=True)
         self.channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
         self.channel.basic_qos(prefetch_count=1)
         self.channel.start_consuming()
