@@ -1,6 +1,6 @@
 import json
 
-from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
+import aiokafka
 
 from logger.logger import logger
 
@@ -9,11 +9,11 @@ async def kafka_consumer():
     while True:
         consumer = None
         try:
-            consumer = AIOKafkaConsumer(
+            consumer = aiokafka.AIOKafkaConsumer(
                 "send_notification",
                 bootstrap_servers="localhost:9092",
                 group_id="notif_group",
-                enable_auto_commit=True,    # If set to False, then use consumer.commit() method to manually commit.
+                enable_auto_commit=True,  # If set to False, then have to use consumer.commit() method to manually commit.
                 auto_commit_interval_ms=1000,  # Autocommit every second
                 auto_offset_reset="earliest",
             )
@@ -31,7 +31,7 @@ async def kafka_consumer():
 
 
 async def kafka_producer(message: str):
-    producer = AIOKafkaProducer(
+    producer = aiokafka.AIOKafkaProducer(
         bootstrap_servers="localhost:9092",
     )
     await producer.start()
