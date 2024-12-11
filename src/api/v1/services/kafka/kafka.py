@@ -23,7 +23,7 @@ async def kafka_consumer():
 
             async for message in consumer:
                 logger.info(f"Kafka Consumer: Key: {message.key} - Value: {message.value}")
-                await consumer.commit()
+                # await consumer.commit()   # If enable_auto_commit=False, then use this.
         except Exception as e:
             logger.error(f"Exception: Kafka Consumer: {str(e)}")
         finally:
