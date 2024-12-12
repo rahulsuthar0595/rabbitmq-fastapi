@@ -5,7 +5,7 @@ from fastapi import APIRouter
 
 from src.api.v1.services.kafka.kafka import kafka_producer
 from src.api.v1.services.rabbit_mq.producer import RabbitMQProducer
-from workers.tasks.tasks import generate_user_invoice, acknowledge_task, schedule_after_api_call
+from workers.tasks import generate_user_invoice, acknowledge_task, schedule_after_api_call
 
 router = APIRouter(prefix="/order")
 
