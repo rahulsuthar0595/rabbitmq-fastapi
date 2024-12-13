@@ -7,20 +7,19 @@ from logger.logger import logger
 
 
 class RedisBroker:
-    def __init__(self, channel: str):
+    def __init__(self):
         self.redis_client = redis.Redis(
             host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB, decode_responses=True
         )
-        self.channel = channel
 
-    def publish(self, data: dict):
+    def publish(self, channel: str, data: dict):
         message = json.dumps(data)
         # Publish the message to the channel
-        self.redis_client.publish(self.channel, message)
+        self.redis_client.publish(channel, message)
 
-    def consume(self):
+    def consume(self, channel: str):
         pubsub = self.redis_client.pubsub()
-        pubsub.subscribe(self.channel)
+        pubsub.subscribe(channel)
         for message in pubsub.listen():
             logger.info(f"Consume message: {message}")
             if message and message["type"] == "message":
