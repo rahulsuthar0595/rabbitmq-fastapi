@@ -2,18 +2,20 @@ import json
 
 import aiokafka
 
+from config.config import settings
 from logger.logger import logger
 
 
-async def kafka_consumer():
+async def kafka_consumer(topic: str, group_id: str):
     while True:
         consumer = None
         try:
             consumer = aiokafka.AIOKafkaConsumer(
-                "send_notification",
-                bootstrap_servers="localhost:9092",
-                group_id="notif_group",
-                enable_auto_commit=True,  # If set to False, then have to use consumer.commit() method to manually commit.
+                topic,
+                bootstrap_servers=settings.KAFKA_SERVER_URL,
+                group_id=group_id,
+                enable_auto_commit=True,
+                # If set to False, then have to use consumer.commit() method to manually commit.
                 auto_commit_interval_ms=1000,  # Autocommit every second
                 auto_offset_reset="earliest",
             )
@@ -30,15 +32,13 @@ async def kafka_consumer():
             await consumer.stop()
 
 
-async def kafka_producer(message: str):
-    producer = aiokafka.AIOKafkaProducer(
-        bootstrap_servers="localhost:9092",
-    )
+async def kafka_producer(topic: str, data: dict):
+    producer = aiokafka.AIOKafkaProducer(bootstrap_servers=settings.KAFKA_SERVER_URL)
     await producer.start()
     try:
-        data = json.dumps({"data": message})
+        data = json.dumps({"data": data})
         logger.info(f"Kafka Producer: data : {data}")
-        await producer.send_and_wait("send_notification", data.encode("utf-8"))
+        await producer.send_and_wait(topic, data.encode("utf-8"))
     except Exception as e:
         logger.error(f"Exception: Kafka Producer: {str(e)}")
     finally:
