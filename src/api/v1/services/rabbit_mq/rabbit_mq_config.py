@@ -2,11 +2,35 @@ import json
 
 import pika
 
+from config.config import settings
 from logger.logger import logger
-from src.api.v1.services.rabbit_mq.base import BaseRabbitMQ
 
 
-class RabbitMQProducer(BaseRabbitMQ):
+class RabbitMQBroker:
+    def __init__(self):
+        self.host = settings.RABBITMQ_HOST
+        self.port = settings.RABBITMQ_PORT
+        self.connection = None
+        self.channel = None
+        self.connect()
+
+    def connect(self):
+        parameters = pika.ConnectionParameters(host=self.host, port=self.port)
+        self.connection = pika.BlockingConnection(parameters)
+        self.channel = self.connection.channel()
+
+    def close_connection(self):
+        if self.connection and not self.connection.is_closed:
+            self.connection.close()
+
+    def consume(self, queue_name, callback):
+        if not self.channel:
+            raise Exception("Connection is not established.")
+
+        self.channel.queue_declare(queue_name, durable=True)
+        self.channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
+        self.channel.basic_qos(prefetch_count=1)
+        self.channel.start_consuming()
 
     async def publish(self, queue_name, message):
         try:
