@@ -13,6 +13,10 @@ class ConfigSetting(BaseSettings):
     REDIS_DB: int
     LEADERBOARD_REDIS_CHANNEL: str
 
+    RABBITMQ_HOST: str
+    RABBITMQ_PORT: int
+    RABBIT_MQ_ORDER_QUEUE: str
+
 
 @lru_cache
 def get_settings():
