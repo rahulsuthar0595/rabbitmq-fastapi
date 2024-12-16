@@ -37,7 +37,7 @@ services:
 
   celery_flower:
     image: mher/flower:latest
-    command: celery -A workers.worker flower
+    command: celery -A workers.worker flower --loglevel=info
     container_name: rabbit-mq-celery-flower
     ports:
       - "5555:5555"

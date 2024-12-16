@@ -1,5 +1,4 @@
-# RabbitMQ with FastAPI
-
+# Celery with FastAPI
 
 ### Run this commands for celery, flower and beat:
 

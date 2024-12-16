@@ -3,6 +3,4 @@ pydantic-settings==2.6.1
 uvicorn==0.32.1
 celery==5.4.0
 redis==5.2.0
-pika==1.3.2     # For RabbitMQ
 flower==2.0.1
-aiokafka==0.12.0
