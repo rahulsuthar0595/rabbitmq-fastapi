@@ -17,6 +17,10 @@ class ConfigSetting(BaseSettings):
     RABBITMQ_PORT: int
     RABBIT_MQ_ORDER_QUEUE: str
 
+    KAFKA_SERVER_URL: str
+    KAFKA_TOPIC_NAME: str
+    KAFKA_GROUP_NAME: str
+
 
 @lru_cache
 def get_settings():

@@ -1,5 +1,6 @@
 import threading
 import json
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -8,6 +9,7 @@ from config.config import settings
 from src.api.v1.services.redis.redis_config import RedisBroker
 from logger.logger import logger
 from src.api.v1.services.rabbit_mq.rabbit_mq_config import RabbitMQBroker
+from src.api.v1.services.kafka.kafka import kafka_consumer
 from src.route.router import router
 
 
@@ -31,6 +33,7 @@ async def lifespan(app: FastAPI):
     thread.start()  # Keeps the thread running as long as FastAPI app is running
     thread = threading.Thread(target=RabbitMQBroker().consume, args=(settings.RABBIT_MQ_ORDER_QUEUE, process_order_callback))
     thread.start()  # Keeps the thread running as long as FastAPI app is running
+    asyncio.create_task(kafka_consumer(settings.KAFKA_TOPIC_NAME, settings.KAFKA_GROUP_NAME))
     yield
 
 
