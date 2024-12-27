@@ -1,41 +1,50 @@
+import os
+import random
 import time
+from datetime import datetime
 
-from celery import shared_task
+from PIL import Image
+from celery.exceptions import MaxRetriesExceededError
 
 from logger.logger import logger
-from workers.worker import celery
+from workers.celery_config import celery
+
+MEDIA_UPLOAD_DIR = "media"
+os.makedirs(MEDIA_UPLOAD_DIR, exist_ok=True)
 
 
-@celery.task
-def generate_user_invoice(size: int):
-    time.sleep(size * 10)
-    if size % 2 == 0:
-        return True
-    return False
-
-
-@shared_task
-def acknowledge_task(size: int):
-    time.sleep(size * 10)
-    return {"message": "Acknowledged task."}
-
-
-@celery.task(name="five_sec_interval_task")
-def five_sec_interval_task():
-    logger.info("five_sec_interval_task executed.")
-    return True
-
-
-@celery.task(bind=True, max_retries=3)
-def schedule_after_api_call(self, message: str):
+@celery.task()
+def convert_image_to_png(image_path: str):
     try:
-        if getattr(self, "is_raise_validation", True):
-            raise Exception("Something went wrong.")
+        time.sleep(10)
+        img = Image.open(image_path)
+        base_name = os.path.splitext(os.path.basename(image_path))[0]
+        output_path = os.path.join(MEDIA_UPLOAD_DIR, f"{base_name}.png")
+        img.convert("RGBA").save(output_path, format="PNG")
+        return {"message": "Image converted successfully", "output_path": output_path}
+    except Exception as e:
+        return {"error": str(e)}
 
-        logger.info(f"schedule_after_api_call {message}")
-        return True
+
+@celery.task(bind=True, max_retries=3, default_retry_delay=10)
+def send_reminder(self, message: str):
+    msg = f"Sending Reminder: {message} at {datetime.now()}"
+    try:
+        if random.choice([True, False]):
+            logger.info(msg)
+            return {"message": msg}
+        else:
+            raise ValueError("Send reminder event failed")
     except Exception as exc:
-        logger.error(f"schedule_after_api_call error: {exc}")
-        # Retry the task if an exception occurs
-        setattr(self, "is_raise_validation", False)
-        raise self.retry(exc=exc, countdown=10)
+        logger.error(f"Task failed: {exc}, retrying after some time....")
+        try:
+            self.retry(exc=exc)
+        except MaxRetriesExceededError:
+            logger.error(f"Max retries exceed for message - {message}")
+            return {"message": "Task failed after max retries."}
+
+
+@celery.task(name="cron_beat_every_min")
+def cron_beat_task(message: str, **kwargs: dict):
+    logger.info(f"Cron Beat task executed successfully with argument - {message} and kwargs - {kwargs}")
+    return {"message": "Success"}

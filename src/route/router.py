@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.api.v1.views import order
+from src.api.v1.views import user
 router = APIRouter(prefix="/api/v1")
 
-router.include_router(order.router, tags=["Order API"])
+router.include_router(user.router, tags=["User API"])

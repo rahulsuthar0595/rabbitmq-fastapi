@@ -2,8 +2,8 @@
 
 ### Run this commands for celery, flower and beat:
 
-celery -A workers.worker beat --loglevel=info
+celery -A workers.celery_config beat --loglevel=info
 
-celery -A workers.worker worker --loglevel=info
+celery -A workers.celery_config worker --loglevel=info
 
-celery -A workers.worker flower --loglevel=info
+celery -A workers.celery_config flower --loglevel=info

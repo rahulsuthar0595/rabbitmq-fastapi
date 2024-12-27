@@ -1,4 +1,5 @@
 from celery import Celery
+from celery.schedules import crontab
 
 from config.config import settings
 
@@ -10,9 +11,10 @@ celery = Celery(
 celery.autodiscover_tasks(["workers"], force=True)
 
 celery.conf.beat_schedule = {
-    "5-sec-task": {
-        "task": "five_sec_interval_task",
-        "schedule": 5.0,  # Time in seconds. We can also use crontab() and schedule()
-        "args": (),
+    "every-min-cron-beat": {
+        "task": "cron_beat_every_min",
+        "schedule": crontab(minute="*/1"),
+        "args": ("This is sample test message.",),
+        "kwargs": {"extra_key": "info"}
     }
 }
